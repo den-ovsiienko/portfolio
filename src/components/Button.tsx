@@ -1,18 +1,36 @@
-import React, { FC } from 'react';
+import React, { FC, ButtonHTMLAttributes } from 'react';
 
-type ButtonProps = {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
   color?: string;
-  className?: string;
   iconLeft?: React.ReactNode;
+  variant?: 'primary' | 'tertiary' | 'outlined';
+}
+
+const buttonVariants = {
+  primary: 'bg-primary text-button-text',
+  // secondary: 'bg-primary-secondary text-button-secondary-text',
+  tertiary: 'bg-transparent text-button-text',
+  outlined: 'bg-transparent text-button-text border-2',
 };
 
-const Button: FC<ButtonProps> = ({ children, className, iconLeft }) => {
+const Button: FC<ButtonProps> = ({
+  children,
+  className,
+  iconLeft,
+  variant = 'primary',
+  ...rest
+}) => {
   return (
     <button
-      className={`bg-gray-100 px-6 py-3 rounded-full font-medium transition-transform hover:-translate-y-0.5 group ${className}`}
+      className={`px-6 py-3 rounded-full font-medium transition-transform active:translate-y-0.5 group hover:underline ${buttonVariants[variant]} ${className}`}
+      {...rest}
     >
-      {iconLeft && <div className="mr-2 inline-block group-hover:animate-shake">{iconLeft}</div>}
+      {iconLeft && (
+        <div className="mr-2 inline-block group-hover:animate-shake my-auto">
+          {iconLeft}
+        </div>
+      )}
       {children}
     </button>
   );

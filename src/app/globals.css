@@ -1,3 +1,33 @@
 @tailwind base;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    @apply font-mono bg-background;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-headline;
+  }
+  p,
+  span,
+  a,
+  li,
+  td,
+  th {
+    @apply text-body;
+  }
+
+  code {
+    @apply font-mono text-white bg-secondary inline-block p-4;
+  }
+}
+
 @tailwind components;
 @tailwind utilities;
