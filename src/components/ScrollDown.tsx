@@ -7,7 +7,7 @@ import { motionShowProps } from '@/utils/constants';
 
 interface ScrollDownProps extends React.HTMLAttributes<HTMLDivElement> {}
 const ScrollDown: FC<ScrollDownProps> = () => {
-  const [show, setShow] = useState<boolean>(window.scrollY < 100);
+  const [show, setShow] = useState<boolean>(false);
   const onClick = () => {
     window.scrollTo({
       top: window.innerHeight - window.scrollY,
@@ -23,6 +23,7 @@ const ScrollDown: FC<ScrollDownProps> = () => {
         setShow(false);
       }
     };
+    handleScroll()
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
