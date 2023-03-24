@@ -8,7 +8,7 @@ export type TypingTextOption = keyof typeof typingTextOptions;
 const bioFunc = (typewriter: TypewriterClass) => {
   const string = ReactDomServer.renderToString(
     <span className="text-4xl font-normal leading-relaxed">
-      <span className="cursor-default animate-shake">👋</span> Hi, I'm{' '}
+      <span className="cursor-default animate-shake">👋</span> Hi, I&apos;m{' '}
       <span className="text-secondary">Denys Ovsiienko</span> - a 22-year-old{' '}
       <span className="text-error">Web</span>,{' '}
       <span className="text-error">Mobile</span> and{' '}
@@ -47,7 +47,7 @@ const helloFunc = (typewriter: TypewriterClass) => {
 
   const nameString = ReactDomServer.renderToString(
     <span className="text-4xl">
-      I'm
+      I&apos;m
       <br />
       <span className="text-secondary text-4xl pl-20">Denys Ovsiienco</span>
     </span>
