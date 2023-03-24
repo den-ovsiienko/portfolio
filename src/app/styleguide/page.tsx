@@ -3,6 +3,7 @@ import Card from '@/components/Card';
 import Emoji from '@/components/Emoji';
 import Input from '@/components/Input';
 import Navbar from '@/components/Navbar';
+import TypingCards from '@/components/TypingCards';
 import TypingText from '@/components/TypingText';
 import { IMAGE_URL } from '@/utils/constants';
 
@@ -143,11 +144,18 @@ export default function Styleguide() {
             description="Some description is here..."
             image={IMAGE_URL}
           />
+          <Card image={IMAGE_URL} />
+
+          <Card title="Title" description="Some description is here..." />
         </div>
         <code className="mt-2 text-sm">
           {
             '<Card title="Title" description="Some description is here..." image="<IMG_URL>" />'
           }
+          <br />
+          {'<Card image="<IMG_URL>" />'}
+          <br />
+          {'<Card title="Title" description="Some description is here..." />'}
         </code>
       </section>
 
@@ -180,11 +188,22 @@ export default function Styleguide() {
         <code className="mt-2 text-sm">{'<Navbar />'}</code>
       </section>
 
+      {/* Projects */}
+      <section className="mt-8">
+        <h2 className="text-2xl border-b">Projects</h2>
+        <div className="mt-2">
+          <TypingCards />
+        </div>
+        <code className="mt-2 text-sm">
+          {'<TypingCards />'}
+        </code>
+      </section>
+
       {/* Bio */}
       <section className="mt-8">
         <h2 className="text-2xl border-b">Bio</h2>
         <div className="mt-2 max-w-xl">
-         <TypingText delay={1} variant='bio' />
+          <TypingText delay={1} variant="bio" />
         </div>
       </section>
     </>

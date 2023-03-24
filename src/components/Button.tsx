@@ -4,6 +4,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
   color?: string;
   iconLeft?: React.ReactNode;
+  iconRight?: React.ReactNode;
   variant?: 'primary' | 'tertiary' | 'outlined';
 }
 
@@ -18,6 +19,7 @@ const Button: FC<ButtonProps> = ({
   children,
   className,
   iconLeft,
+  iconRight,
   variant = 'primary',
   ...rest
 }) => {
@@ -32,6 +34,11 @@ const Button: FC<ButtonProps> = ({
         </div>
       )}
       {children}
+      {iconRight && (
+        <div className="ml-2 inline-block group-hover:animate-shake my-auto">
+          {iconRight}
+        </div>
+      )}
     </button>
   );
 };

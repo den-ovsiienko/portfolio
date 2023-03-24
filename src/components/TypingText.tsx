@@ -1,7 +1,7 @@
 'use client';
 
 import React, { FC } from 'react';
-import Typewriter, { TypewriterClass } from 'typewriter-effect';
+import Typewriter, { Options, TypewriterClass } from 'typewriter-effect';
 import ReactDomServer from 'react-dom/server';
 import GraphemeSplitter from 'grapheme-splitter';
 import {
@@ -11,14 +11,15 @@ import {
   typingTextVariants,
 } from '@/utils/typingTextVariants';
 
-type TypingTextProps = {
+interface TypingTextProps extends Partial<Options> {
   onInit?: (typewriter: TypewriterClass) => void;
   cursorClassName?: string;
   autostart?: boolean;
   variant?: TypingTextVariant;
   loop?: boolean;
   delay?: number | 'natural';
-};
+  onTypeEnd?: () => void;
+}
 const stringSplitter = (string: string) => {
   const splitter = new GraphemeSplitter();
   return splitter.splitGraphemes(string);
@@ -30,22 +31,33 @@ const TypingText: FC<TypingTextProps> = ({
   autostart,
   variant,
   loop = false,
-  delay = 'natural'
+  delay = 'natural',
+  onTypeEnd,
+  ...options
 }) => {
   const typeInit = variant ? typingTextVariants[variant] : undefined;
   const typeOptions =
     variant && variant in typingTextOptions
       ? typingTextOptions[variant as TypingTextOption]
       : {};
+
+  const handleInit = (typewriter: TypewriterClass) => {
+    if (onInit) {
+      onInit(typewriter);
+    } else if (typeInit) {
+      typeInit(typewriter);
+    }
+    if (onTypeEnd) {
+      typewriter.callFunction(() => onTypeEnd());
+    }
+  };
   return (
     <Typewriter
-      onInit={onInit || typeInit}
+      onInit={handleInit}
       options={{
         loop: loop,
         autoStart: autostart ? autostart : true,
-        cursorClassName: cursorClassName
-          ? cursorClassName
-          : 'text-4xl animate-cursor',
+        cursorClassName: `text-4xl animate-cursor ${cursorClassName}`,
         stringSplitter: stringSplitter as any,
         delay: delay,
         ...typeOptions,

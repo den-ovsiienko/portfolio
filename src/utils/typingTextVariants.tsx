@@ -5,19 +5,19 @@ export type TypingTextVariant = keyof typeof typingTextVariants;
 
 export type TypingTextOption = keyof typeof typingTextOptions;
 
-const bioFunc = (typewriter: TypewriterClass) => {
-  const string = ReactDomServer.renderToString(
-    <span className="text-4xl font-normal leading-relaxed">
-      <span className="cursor-default animate-shake">👋</span> Hi, I&apos;m{' '}
-      <span className="text-secondary">Denys Ovsiienko</span> - a 22-year-old{' '}
-      <span className="text-error">Web</span>,{' '}
-      <span className="text-error">Mobile</span> and{' '}
-      <span className="text-error">DevOps</span>{' '}
-      <span className="font-bold">full stack</span> engineer from 🇺🇦 Ukraine.
-    </span>
-  );
+export const bioString = ReactDomServer.renderToString(
+  <span className="text-4xl font-normal leading-relaxed">
+    <span className="cursor-default animate-shake">👋</span> Hi, I&apos;m{' '}
+    <span className="text-secondary">Denys Ovsiienko</span> - a 22-year-old{' '}
+    <span className="text-error">Web</span>,{' '}
+    <span className="text-error">Mobile</span> and{' '}
+    <span className="text-error">DevOps</span>{' '}
+    <span className="font-bold">full stack</span> engineer from 🇺🇦 Ukraine.
+  </span>
+);
 
-  typewriter.typeString(string).start();
+const bioFunc = (typewriter: TypewriterClass) => {
+  typewriter.typeString(bioString).start();
 };
 
 const styleguideFunc = (typewriter: TypewriterClass) => {
@@ -42,7 +42,9 @@ const typing = (typewriter: TypewriterClass) => {
 
 const helloFunc = (typewriter: TypewriterClass) => {
   const helloString = ReactDomServer.renderToString(
-    <span className="text-4xl font-normal">👋 Hello there! </span>
+    <span className="text-4xl font-normal">
+      <span className="animate-shake">👋</span> Hello there!{' '}
+    </span>
   );
 
   const nameString = ReactDomServer.renderToString(
