@@ -7,7 +7,7 @@ import { IMAGE_URL, IMAGE_URL_2, motionShowProps } from '@/utils/constants';
 import Card from './Card';
 import ReactDomServer from 'react-dom/server';
 import Button from './Button';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 const data = [
   {
     title: 'GameList GG',
@@ -25,6 +25,8 @@ const data = [
 const TypingCards = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const typewriterRef = useRef<TypewriterClass>();
+  const ref = useRef<any>(null);
+  const isInView = useInView(ref);
 
   const nextDisabled = currentIndex === data.length - 1;
   const prevDisabled = currentIndex === 0;
@@ -38,14 +40,14 @@ const TypingCards = () => {
       .typeString(
         ReactDomServer.renderToString(
           <>
-            <span className="text-lg bg-primary">{item.title}</span>
+            <span className="text-lg bg-primary text-black">{item.title}</span>
             <br />
             <br />
           </>
         )
       )
       .changeDelay(1)
-      .pauseFor(1000)
+      .pauseFor(500)
       .pasteString(
         ReactDomServer.renderToString(
           <>
@@ -76,7 +78,7 @@ const TypingCards = () => {
 
   const getIndicators = (className: string) => (
     <div
-      className={`mt-2 flex items-center justify-between w-full lg:w-1/2 lg:pl-10, ${className}`}
+      className={`flex items-center justify-between w-full lg:w-1/2 lg:pl-10, ${className}`}
     >
       <span className="text-sm text-error">
         Project: {currentIndex + 1}/{data.length}
@@ -121,12 +123,14 @@ const TypingCards = () => {
             />
           </AnimatePresence>
           {getIndicators('lg:hidden m-0')}
-          <div className="flex-1">
-            <TypingText
-              deleteSpeed={0}
-              cursorClassName="text-xl"
-              onInit={onInit}
-            />
+          <div className="flex-1" ref={ref}>
+            {isInView && (
+              <TypingText
+                deleteSpeed={0}
+                cursorClassName="text-xl"
+                onInit={onInit}
+              />
+            )}
           </div>
         </div>
         {getIndicators('lg:flex hidden')}

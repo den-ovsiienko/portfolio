@@ -11,7 +11,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const buttonVariants = {
   primary: 'bg-primary text-button-text',
   // secondary: 'bg-primary-secondary text-button-secondary-text',
-  tertiary: 'bg-transparent text-button-text',
+  tertiary: 'bg-transparent text-body',
   outlined: 'bg-transparent text-button-text border-2',
 };
 

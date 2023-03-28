@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { motionShowProps } from '@/utils/constants';
 
 interface ScrollDownProps extends React.HTMLAttributes<HTMLDivElement> {}
-const ScrollDown: FC<ScrollDownProps> = () => {
+const ScrollDown: FC<ScrollDownProps> = ({...other}) => {
   const [show, setShow] = useState<boolean>(false);
   const onClick = () => {
     window.scrollTo({
@@ -34,10 +34,10 @@ const ScrollDown: FC<ScrollDownProps> = () => {
   }
   return (
     <motion.div
-      className="absolute bottom-10 left-1/2 translate-x-1/2"
+      className="absolute bottom-10 left-1/2 -translate-x-1/2"
       {...motionShowProps}
       whileInView={{ opacity: 1, translateX: '-50%', translateY: 0 }}
-      onClick={onClick}
+      onClick={other.onClick || onClick}
     >
       <div className="animate-bounce flex flex-col">
         <p className="tracking-widest ">Scroll Down</p>

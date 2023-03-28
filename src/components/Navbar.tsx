@@ -92,20 +92,20 @@ const Navbar: FC<NavbarProps> = ({ styleguide }) => {
   return (
     <>
       <motion.nav
-        className={`bg-white z-50 h-[${NAVBAR_HEIGHT}px] ${
+        className={` z-50 h-[${NAVBAR_HEIGHT}px] ${
           styleguide ? 'shadow-md' : 'fixed'
         } flex w-full ${scrolled ? 'shadow-md border-indigo-500' : ''}}`}
         initial={{ y: -NAVBAR_HEIGHT }}
         animate={{ y: visible ? 0 : -NAVBAR_HEIGHT }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       >
-        <div className="flex w-full flex-row justify-between p-2 max-w-screen-2xl mx-auto gap-2 items-center">
+        <div className="flex w-full flex-row justify-between p-5 max-w-screen-2xl mx-auto gap-2 items-center">
           <Emoji className="text-xl" icon="</>" />
           <div className="flex-row gap-6 hidden md:flex">{items}</div>
           {!!pathButton[pathname] && pathButton[pathname]}
         </div>
       </motion.nav>
-      {!styleguide && <div style={{ height: NAVBAR_HEIGHT }} />}
+      {/* {!styleguide && <div style={{ height: NAVBAR_HEIGHT }} />} */}
     </>
   );
 };

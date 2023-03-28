@@ -41,17 +41,20 @@ const typing = (typewriter: TypewriterClass) => {
 };
 
 const helloFunc = (typewriter: TypewriterClass) => {
+  const isDesktop = window?.innerWidth > 870;
   const helloString = ReactDomServer.renderToString(
-    <span className="text-4xl font-normal">
+    <span className="text-4xl font-normal text-headline">
       <span className="animate-shake">👋</span> Hello there!{' '}
     </span>
   );
 
   const nameString = ReactDomServer.renderToString(
-    <span className="text-4xl">
+    <span className="text-4xl text-headline">
       I&apos;m
-      <br />
-      <span className="text-secondary text-4xl pl-20">Denys Ovsiienco</span>
+      {isDesktop ? <br /> : ' '}
+      <span className={`text-headline text-4xl ${isDesktop ? 'pl-20' : ''}`}>
+        Denys Ovsiienco
+      </span>
     </span>
   );
 
@@ -59,7 +62,7 @@ const helloFunc = (typewriter: TypewriterClass) => {
     <span className="text-error text-4xl">k</span>
   );
   const newNameString2 = ReactDomServer.renderToString(
-    <span className="text-4xl text-secondary">o</span>
+    <span className="text-headline text-4xl ">o</span>
   );
 
   typewriter
